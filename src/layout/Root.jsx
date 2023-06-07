@@ -1,8 +1,10 @@
 import { Outlet } from "react-router-dom";
+import Header from "../components/shared/Header/Header";
 
 const Root = () => {
   return (
     <>
+      <Header />
       <main>
         <Outlet />
       </main>
