@@ -3,7 +3,7 @@ import "./Dashboard.css";
 const Dashboard = () => {
   return (
     <div className="drop_down cursor-pointer">
-      <div className="relative my-2">
+      <div className="relative">
         <img
           className="w-10 h-10 rounded-full"
           src="https://images.unsplash.com/photo-1682687220208-22d7a2543e88?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
