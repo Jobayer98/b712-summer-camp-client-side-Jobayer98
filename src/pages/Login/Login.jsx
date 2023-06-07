@@ -13,22 +13,24 @@ const LoginPage = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">
-          <input
-            type="email"
-            placeholder="Enter your email"
-            {...register("email", { required: true })}
-          />
-          {/* {errors.email && <span>Invalid email</span>} */}
-        </label>
-        <label htmlFor="password">
-          <input
-            type="password"
-            placeholder="Enter your password"
-            {...register("password", { required: true })}
-          />
-          {/* {errors.password && <span>Invalid password</span>} */}
-        </label>
+        <div>
+          <label htmlFor="email">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              {...register("email", { required: true })}
+            />
+            {/* {errors.email && <span>Invalid email</span>} */}
+          </label>
+          <label htmlFor="password">
+            <input
+              type="password"
+              placeholder="Enter your password"
+              {...register("password", { required: true })}
+            />
+            {/* {errors.password && <span>Invalid password</span>} */}
+          </label>
+        </div>
         <button type="submit">Login</button>
       </form>
       <div>
