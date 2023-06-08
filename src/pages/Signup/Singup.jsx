@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 
 import "../Login/Login.css";
 import { Radio, RadioGroup } from "react-radio-group";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const SignUpPage = () => {
   const [error, setError] = useState(false);
+  const [isText, setIsText] = useState(false);
+  const [confirm, setconfirm] = useState(false);
   const [selectedValue, setselectedValue] = useState("male");
   const {
     // reset,
@@ -37,8 +40,15 @@ const SignUpPage = () => {
     });
   };
 
+  const handleShowPassword = () => {
+    setIsText(!isText);
+  };
+  const handleShowPassword2 = () => {
+    setconfirm(!isText);
+  };
+
   return (
-    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto mt-20">
+    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto mt-8">
       <div className="flex flex-col gap-2 p-10 border shadow-sm">
         <h1 className="text-md font-bold mb-2">Sign up and start learning</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
@@ -64,9 +74,9 @@ const SignUpPage = () => {
               <span className="text-red-500">Email is required</span>
             )}
           </div>
-          <div>
+          <div className="relative">
             <input
-              type="text"
+              type={isText ? "text" : "password"}
               className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
               placeholder="Password"
               {...register("password", {
@@ -76,6 +86,17 @@ const SignUpPage = () => {
                 pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
               })}
             />
+            {isText ? (
+              <AiOutlineEyeInvisible
+                onClick={handleShowPassword}
+                className="absolute top-5 right-2 cursor-pointer"
+              />
+            ) : (
+              <AiOutlineEye
+                onClick={handleShowPassword}
+                className="absolute top-5 right-2 cursor-pointer"
+              />
+            )}
             {errors.password?.type === "required" && (
               <span className="text-red-500">Password is required</span>
             )}
@@ -90,13 +111,24 @@ const SignUpPage = () => {
               </span>
             )}
           </div>
-          <div>
+          <div className="relative">
             <input
-              type="password"
+              type={confirm ? "text" : "password"}
               className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
               placeholder="Confirm password"
               {...register("con_password", { required: true })}
             />
+            {confirm ? (
+              <AiOutlineEyeInvisible
+                onClick={handleShowPassword2}
+                className="absolute top-5 right-2 cursor-pointer"
+              />
+            ) : (
+              <AiOutlineEye
+                onClick={handleShowPassword2}
+                className="absolute top-5 right-2 cursor-pointer"
+              />
+            )}
             {errors.con_password?.type === "required" && (
               <span className="text-red-500">password did not match</span>
             )}
@@ -114,24 +146,6 @@ const SignUpPage = () => {
               placeholder="http://www.example.com"
               {...register("image")}
             />
-          </div>
-
-          <div>
-            <RadioGroup
-              className="flex gap-3"
-              name="fruit"
-              selectedValue={selectedValue}
-              onChange={handleChange}
-            >
-              <label htmlFor="male">
-                <Radio value="male" className="mr-1" />
-                Male
-              </label>
-              <label htmlFor="female">
-                <Radio value="female" className="mr-1" />
-                Female
-              </label>
-            </RadioGroup>
           </div>
           <div>
             <input
@@ -151,6 +165,24 @@ const SignUpPage = () => {
               placeholder="Address"
               {...register("address")}
             />
+          </div>
+          <div>
+            <p className="font-semibold my-2">Gender</p>
+            <RadioGroup
+              className="flex gap-3"
+              name="fruit"
+              selectedValue={selectedValue}
+              onChange={handleChange}
+            >
+              <label htmlFor="male">
+                <Radio value="male" className="mr-1" />
+                Male
+              </label>
+              <label htmlFor="female">
+                <Radio value="female" className="mr-1" />
+                Female
+              </label>
+            </RadioGroup>
           </div>
           <button
             type="submit"

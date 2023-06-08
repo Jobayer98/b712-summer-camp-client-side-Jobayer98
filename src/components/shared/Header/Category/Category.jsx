@@ -6,7 +6,7 @@ const Category = () => {
   return (
     <div className="relative category py-3 cursor-pointer">
       Category
-      <div className="absolute invisible flex flex-col gap-2 bg-white mt-3 px-4 py-4  shadow-md border category_list w-[220px] h-72">
+      <div className="absolute invisible flex flex-col gap-2 bg-white mt-3 px-4 py-4  shadow-md border category_list w-[220px] h-72 z-10">
         <div className="flex justify-between sub_category relative">
           <Link className=" hover:text-orange-700 flex-1">English</Link>
           <FaAngleRight />
