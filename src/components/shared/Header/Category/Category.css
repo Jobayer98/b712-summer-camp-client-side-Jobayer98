@@ -1,0 +1,7 @@
+.category:hover .category_list {
+  visibility: visible;
+}
+
+.sub_category:hover .sub_category_list {
+  visibility: visible;
+}

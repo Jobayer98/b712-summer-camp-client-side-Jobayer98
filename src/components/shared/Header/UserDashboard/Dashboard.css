@@ -1,4 +1,4 @@
 .drop_down:hover .dropdown_list {
-  display: block;
-  transition: display 300ms linear;
+  visibility: visible;
+  transition: visibility 300ms linear;
 }
