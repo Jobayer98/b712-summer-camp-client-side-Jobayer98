@@ -1,9 +1,9 @@
 import Card from "../../../components/UI/Card/Card";
 
-const PopularLang = () => {
+const PopularIns = () => {
   return (
     <div className="mt-20">
-      <h1 className="text-center text-3xl mb-6">Popular Language</h1>
+      <h1 className="text-center text-3xl mb-6">Popular Instructors</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 place-items-center gap-10">
         <Card
           img={
@@ -52,4 +52,4 @@ const PopularLang = () => {
   );
 };
 
-export default PopularLang;
+export default PopularIns;
