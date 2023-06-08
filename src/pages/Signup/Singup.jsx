@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+
+import "../Login/Login.css";
+import { Radio, RadioGroup } from "react-radio-group";
 
 const SignUpPage = () => {
   const [error, setError] = useState(false);
-  const [isChecked, setChecked] = useState("male");
+  const [selectedValue, setselectedValue] = useState("male");
   const {
     // reset,
     register,
@@ -14,7 +18,7 @@ const SignUpPage = () => {
   const onSubmit = (data) => {
     if (data.password === data.con_password) {
       setError(false);
-      data.gender = isChecked;
+      data.gender = selectedValue;
       console.log(data);
     } else {
       setError(true);
@@ -24,7 +28,7 @@ const SignUpPage = () => {
   };
 
   const handleChange = () => {
-    setChecked((preValue) => {
+    setselectedValue((preValue) => {
       if (preValue === "male") {
         return "female";
       } else {
@@ -34,33 +38,37 @@ const SignUpPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="name">
+    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto mt-20">
+      <div className="flex flex-col gap-2 p-10 border shadow-sm">
+        <h1 className="text-md font-bold mb-2">Sign up and start learning</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+          <div>
             <input
               type="text"
-              placeholder="Enter your name"
+              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              placeholder="Full name"
               {...register("name", { required: true })}
             />
             {errors.name?.type === "required" && (
               <span className="text-red-500">Name is required</span>
             )}
-          </label>
-          <label htmlFor="email">
+          </div>
+          <div>
             <input
               type="email"
-              placeholder="Enter your email"
+              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              placeholder="Email"
               {...register("email", { required: true })}
             />
             {errors.email?.type === "required" && (
               <span className="text-red-500">Email is required</span>
             )}
-          </label>
-          <label htmlFor="password">
+          </div>
+          <div>
             <input
               type="text"
-              placeholder="******"
+              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              placeholder="Password"
               {...register("password", {
                 required: true,
                 minLength: 6,
@@ -81,74 +89,87 @@ const SignUpPage = () => {
                 Password must have one capital letter and one special character
               </span>
             )}
-          </label>
-          <label htmlFor="con_password">
+          </div>
+          <div>
             <input
               type="password"
-              placeholder="******"
+              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              placeholder="Confirm password"
               {...register("con_password", { required: true })}
             />
-          </label>
-          {errors.con_password?.type === "required" && (
-            <span className="text-red-500">password did not match</span>
-          )}
-          {error && (
-            <span className="text-red-500">{"password didn't match"}</span>
-          )}
+            {errors.con_password?.type === "required" && (
+              <span className="text-red-500">password did not match</span>
+            )}
+            {error && (
+              <span className="text-red-500">{"password didn't match"}</span>
+            )}
+          </div>
 
-          <label htmlFor="image">
+          <div>
             <input
               type="url"
+              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
               name="image"
               id="image"
               placeholder="http://www.example.com"
               {...register("image")}
             />
-          </label>
-          <div>
-            <input
-              onChange={handleChange}
-              type="radio"
-              name=""
-              id="male"
-              value="male"
-              checked={isChecked === "male" && true}
-            />
-            <label htmlFor="male">Male</label>
-            <input
-              onChange={handleChange}
-              type="radio"
-              name=""
-              id="female"
-              value="female"
-              checked={isChecked === "female" && true}
-            />
-            <label htmlFor="female">Female</label>
           </div>
 
-          <label htmlFor="phone">
+          <div>
+            <RadioGroup
+              className="flex gap-3"
+              name="fruit"
+              selectedValue={selectedValue}
+              onChange={handleChange}
+            >
+              <label htmlFor="male">
+                <Radio value="male" className="mr-1" />
+                Male
+              </label>
+              <label htmlFor="female">
+                <Radio value="female" className="mr-1" />
+                Female
+              </label>
+            </RadioGroup>
+          </div>
+          <div>
             <input
+              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
               type="number"
               name="phone"
               id="phone"
-              placeholder="+88016xxxxxxx"
+              placeholder="Phone"
               {...register("phone")}
             />
-          </label>
-          <label htmlFor="address">
+          </div>
+          <div>
             <input
+              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
               type="text"
               name="address"
-              placeholder="21/D Boston"
+              placeholder="Address"
               {...register("address")}
             />
-          </label>
+          </div>
+          <button
+            type="submit"
+            className="bg-orange-700 py-3 w-full mt-3 text-white font-bold"
+          >
+            Signup
+          </button>
+        </form>
+        <div className="text-center">
+          <span>
+            {"Already have an account? "}
+            <Link
+              className="font-semibold underline text-orange-600"
+              to="/login"
+            >
+              Log in
+            </Link>
+          </span>
         </div>
-        <button type="submit">Signup</button>
-      </form>
-      <div>
-        <button>Login with google</button>
-        <button>Login with facebook</button>
       </div>
     </div>
   );
