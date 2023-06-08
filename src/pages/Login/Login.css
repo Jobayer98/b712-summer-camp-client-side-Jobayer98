@@ -1,0 +1,9 @@
+.input_field::placeholder {
+  color: #000;
+  font-weight: 500;
+}
+
+.input_field:focus::placeholder {
+  visibility: hidden;
+  transition: visibility 100ms linear;
+}
