@@ -3,25 +3,42 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BsFacebook, BsGithub } from "react-icons/bs";
 import "./Login.css";
-import { Link } from "react-router-dom";
-import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
+import AuthContext from "../../context/AuthContext";
+import { toast } from "react-hot-toast";
+
+const notify = () => toast.success("Login successfully");
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
   const [isText, setIsText] = useState(false);
+  const [error, setError] = useState(false);
   const passRef = useRef();
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleShowPassword = () => {
     setIsText(!isText);
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    login(data.email, data.password)
+      .then((res) => {
+        setError(false);
+        if (res?.user) {
+          notify();
+          navigate("/");
+        }
+      })
+      .catch(() => {
+        setError(true);
+      });
   };
   return (
-    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto mt-8">
+    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">
       <div className="flex flex-col gap-2 p-10 border shadow-sm">
-        <h1 className="text-md font-bold mb-2">Log in to your xxxx account</h1>
+        <h1 className="text-md font-bold mb-2">Log in to your account</h1>
         <div className="flex flex-col gap-2">
           <button className="border-[1px] border-black py-[10px] flex justify-start items-center gap-2 font-bold pl-3">
             <FcGoogle className="text-3xl" /> Continue with Google
@@ -42,7 +59,6 @@ const LoginPage = () => {
               placeholder="Email"
               {...register("email", { required: true })}
             />
-            {/* {errors.email && <span>Invalid email</span>} */}
           </div>
           <div className="relative">
             <input
@@ -63,10 +79,14 @@ const LoginPage = () => {
                 className="absolute top-5 right-2 cursor-pointer"
               />
             )}
-            {/* {errors.password && <span>Invalid password</span>} */}
+            {error && (
+              <span className="text-red-500 inline-block mt-2">
+                Invalid email /password
+              </span>
+            )}
           </div>
           <button
-            className="bg-orange-700 py-3 w-full mt-3 text-white font-bold"
+            className="bg-[#a435f0] hover:bg-[#8810d8] py-3 w-full mt-3 text-white font-bold"
             type="submit"
           >
             Log in
@@ -74,7 +94,7 @@ const LoginPage = () => {
         </form>
         <div className="text-center my-2">
           <span className="font-normal mr-1">or</span>
-          <Link className="font-bold underline text-orange-600" to="#">
+          <Link className="font-bold underline text-[#a435f0]" to="#">
             Frogot Password
           </Link>
         </div>
@@ -83,7 +103,7 @@ const LoginPage = () => {
           <span>
             {"Don't have an account? "}
             <Link
-              className="font-semibold underline text-orange-600"
+              className="font-semibold underline text-[#a435f0]"
               to="/signup"
             >
               Sign up

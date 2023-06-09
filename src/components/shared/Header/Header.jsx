@@ -25,21 +25,17 @@ const Header = () => {
           <Search />
         </div>
         <div className="w-[40%] flex justify-end items-center gap-16">
+          <Link to="/my-selected-classes">
+            <HiOutlineShoppingCart className="text-2xl cursor-pointer" />
+          </Link>
           {user ? (
             <>
               {role === "instructor" ? (
-                <>
-                  <Link to="myclasses">My Classes</Link>
-                </>
+                <Link to="myclasses">My Classes</Link>
               ) : (
-                <>
-                  {" "}
-                  <Link to="mycourses">My Learning</Link>
-                  <Link to="/my-selected-classes">
-                    <HiOutlineShoppingCart className="text-2xl cursor-pointer" />
-                  </Link>
-                </>
+                <Link to="mycourses">My Learning</Link>
               )}
+
               <Dashboard />
             </>
           ) : (

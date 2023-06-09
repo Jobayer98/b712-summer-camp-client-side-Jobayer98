@@ -205,7 +205,7 @@ const SignUpPage = () => {
           </div>
           <button
             type="submit"
-            className="bg-orange-700 py-3 w-full mt-3 text-white font-bold"
+            className="bg-[#a435f0] hover:bg-[#8810d8] py-3 w-full mt-3 text-white font-bold"
           >
             Signup
           </button>
@@ -214,7 +214,7 @@ const SignUpPage = () => {
           <span>
             {"Already have an account? "}
             <Link
-              className="font-semibold underline text-orange-600"
+              className="font-semibold underline text-[#a435f0]"
               to="/login"
             >
               Log in

@@ -11,6 +11,7 @@ import MyClasses from "../pages/Instructor/MyClasses/MyClasses";
 import UpdateClass from "../pages/Instructor/MyClasses/UpdateClass";
 import MySelectedClass from "../pages/User/SelectedClass/MySelectedClass";
 import MyCourses from "../pages/User/MyCourses/MyCourses";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,31 +25,59 @@ const router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: <Instructor />,
+        element: (
+          <PrivateRoute>
+            <Instructor />
+          </PrivateRoute>
+        ),
       },
       {
         path: "instructors/dashboard",
-        element: <Dashboard />,
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myclasses",
-        element: <MyClasses />,
+        element: (
+          <PrivateRoute>
+            <MyClasses />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myclasses/:id",
-        element: <UpdateClass />,
+        element: (
+          <PrivateRoute>
+            <UpdateClass />
+          </PrivateRoute>
+        ),
       },
       {
         path: "classes",
-        element: <Classes />,
+        element: (
+          <PrivateRoute>
+            <Classes />
+          </PrivateRoute>
+        ),
       },
       {
         path: "mycourses",
-        element: <MyCourses />,
+        element: (
+          <PrivateRoute>
+            <MyCourses />
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-selected-classes",
-        element: <MySelectedClass />,
+        element: (
+          <PrivateRoute>
+            <MySelectedClass />
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
