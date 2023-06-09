@@ -1,5 +1,6 @@
 //external module
 import { BsSearch } from "react-icons/bs";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 
 // internal module
 import Search from "./Search";
@@ -9,12 +10,12 @@ import Category from "./Category/Category";
 
 const Header = () => {
   const isLogin = true;
-  const role = "instructor";
+  const role = "student";
   return (
     <header>
       <div className="flex justify-between items-center gap-8 px-8 py-4 shadow-lg max-w-[1920px] mx-auto">
         <div className="w-[30%] flex items-center gap-12">
-          <h1>logo</h1>
+          <Link to="/">logo</Link>
           <Category />
         </div>
         <div className="w-[30%] relative">
@@ -25,9 +26,17 @@ const Header = () => {
           {isLogin ? (
             <>
               {role === "instructor" ? (
-                <Link to="myclasses">My Classes</Link>
+                <>
+                  <Link to="myclasses">My Classes</Link>
+                </>
               ) : (
-                <Link to="myclasses">My Learning</Link>
+                <>
+                  {" "}
+                  <Link to="mycourses">My Learning</Link>
+                  <Link to="/my-selected-classes">
+                    <HiOutlineShoppingCart className="text-2xl cursor-pointer" />
+                  </Link>
+                </>
               )}
               <Dashboard />
             </>

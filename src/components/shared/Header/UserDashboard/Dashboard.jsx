@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Dashboard.css";
 const Dashboard = () => {
-  const role = "instructor";
+  const role = "student";
   return (
     <div className="drop_down cursor-pointer">
       <div className="relative">
@@ -26,9 +26,13 @@ const Dashboard = () => {
           <hr />
           <div className="flex flex-col gap-2 py-2 px-8">
             {role === "instructor" ? (
-              <Link className="hover:text-orange-700">My Classes</Link>
+              <Link to="/myclasses" className="hover:text-orange-700">
+                My Classes
+              </Link>
             ) : (
-              <Link className="hover:text-orange-700">My Learning</Link>
+              <Link to="/mycourses" className="hover:text-orange-700">
+                My Learning
+              </Link>
             )}
             <Link className="hover:text-orange-700">Notification</Link>
             <Link className="hover:text-orange-700">Message</Link>

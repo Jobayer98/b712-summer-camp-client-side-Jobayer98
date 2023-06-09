@@ -38,7 +38,7 @@ const Classes = () => {
             </div>
             <div className="text-center">
               <button className="border-[1px] border-orange-700 text-orange-700 px-4 py-2 rounded text-sm">
-                Admission Now
+                Enroll Now
               </button>
             </div>
           </div>
