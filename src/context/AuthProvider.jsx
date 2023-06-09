@@ -3,6 +3,7 @@ import AuthContext from "./AuthContext";
 import auth from "../firebase/firebase.config";
 import {
   FacebookAuthProvider,
+  GithubAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -13,7 +14,7 @@ import {
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // register new user
   const createUser = (email, password) => {
@@ -34,9 +35,7 @@ const AuthProvider = ({ children }) => {
 
     const provider = new GoogleAuthProvider();
 
-    signInWithPopup(auth, provider)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+    return signInWithPopup(auth, provider);
   };
 
   // login with facebook
@@ -45,9 +44,14 @@ const AuthProvider = ({ children }) => {
 
     const provider = new FacebookAuthProvider();
 
-    signInWithPopup(auth, provider)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+    return signInWithPopup(auth, provider);
+  };
+
+  //  login with github
+  const loginWithGithub = () => {
+    const provider = new GithubAuthProvider();
+
+    return signInWithPopup(auth, provider);
   };
 
   // logout user
@@ -73,6 +77,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     loginWithGoogle,
     loginWithFacebook,
+    loginWithGithub,
     logout,
   };
   return (

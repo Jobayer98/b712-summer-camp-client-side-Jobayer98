@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "../Login/Login.css";
 import { Radio, RadioGroup } from "react-radio-group";
@@ -25,7 +25,10 @@ const SignUpPage = () => {
   // auth context
   const { createUser } = useContext(AuthContext);
   // navigate to home
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const from = location.state?.form?.pathname || "/";
 
   const onSubmit = (data) => {
     if (data.password === data.con_password) {
@@ -38,7 +41,7 @@ const SignUpPage = () => {
             (res.user.displayName = data.name),
               (res.user.photoURL = data.image);
 
-            navigate("/");
+            navigate(from, { replace: true });
           }
         })
         .catch((e) => console.log(e));

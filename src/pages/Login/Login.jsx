@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BsFacebook, BsGithub } from "react-icons/bs";
 import "./Login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
@@ -15,8 +15,12 @@ const LoginPage = () => {
   const [isText, setIsText] = useState(false);
   const [error, setError] = useState(false);
   const passRef = useRef();
+  const location = useLocation();
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login, loginWithGoogle, loginWithFacebook, loginWithGithub } =
+    useContext(AuthContext);
+
+  const from = location.state?.form?.pathname || "/";
 
   const handleShowPassword = () => {
     setIsText(!isText);
@@ -28,7 +32,54 @@ const LoginPage = () => {
         setError(false);
         if (res?.user) {
           notify();
-          navigate("/");
+          navigate(from, { replace: true });
+        }
+      })
+      .catch(() => {
+        setError(true);
+      });
+  };
+
+  // login with google account
+  const handleLoginGoogle = () => {
+    loginWithGoogle()
+      .then((res) => {
+        setError(false);
+        if (res?.user) {
+          notify();
+          navigate(from, { replace: true });
+        }
+      })
+      .catch(() => {
+        setError(true);
+      });
+  };
+
+  // login with github account
+
+  const handleLoginGithub = () => {
+    loginWithGithub()
+      .then((res) => {
+        setError(false);
+        if (res?.user) {
+          notify();
+          navigate(from, { replace: true });
+        }
+      })
+      .catch(() => {
+        setError(true);
+      });
+  };
+
+  // login with facebook account
+
+  const handLoginFacebook = () => {
+    loginWithFacebook()
+      .then((res) => {
+        setError(false);
+        if (res?.user) {
+          notify();
+          navigate(from, { replace: true });
         }
       })
       .catch(() => {
@@ -40,14 +91,23 @@ const LoginPage = () => {
       <div className="flex flex-col gap-2 p-10 border shadow-sm">
         <h1 className="text-md font-bold mb-2">Log in to your account</h1>
         <div className="flex flex-col gap-2">
-          <button className="border-[1px] border-black py-[10px] flex justify-start items-center gap-2 font-bold pl-3">
+          <button
+            onClick={handleLoginGoogle}
+            className="border-[1px] border-black py-[10px] flex justify-start items-center gap-2 font-bold pl-3"
+          >
             <FcGoogle className="text-3xl" /> Continue with Google
           </button>
-          <button className="border-[1px] border-black py-[10px] flex justify-start items-center gap-2 font-bold pl-3">
+          <button
+            onClick={handLoginFacebook}
+            className="border-[1px] border-black py-[10px] flex justify-start items-center gap-2 font-bold pl-3"
+          >
             <BsFacebook className="text-3xl text-[#3b5998]" /> Continue with
             Facebook
           </button>
-          <button className="border-[1px] border-black py-[10px] flex justify-start items-center gap-2 font-bold pl-3">
+          <button
+            onClick={handleLoginGithub}
+            className="border-[1px] border-black py-[10px] flex justify-start items-center gap-2 font-bold pl-3"
+          >
             <BsGithub className="text-3xl" /> Continue with Github
           </button>
         </div>
@@ -81,7 +141,7 @@ const LoginPage = () => {
             )}
             {error && (
               <span className="text-red-500 inline-block mt-2">
-                Invalid email /password
+                Invalid email/password
               </span>
             )}
           </div>

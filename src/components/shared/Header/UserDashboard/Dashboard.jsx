@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 import { useContext } from "react";
 import AuthContext from "../../../../context/AuthContext";
 const Dashboard = () => {
   const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout();
+    navigate("/");
   };
   const role = "student";
   return (
