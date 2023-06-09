@@ -8,7 +8,8 @@ import Dashboard from "./UserDashboard/Dashboard";
 import Category from "./Category/Category";
 
 const Header = () => {
-  const isLogin = false;
+  const isLogin = true;
+  const role = "instructor";
   return (
     <header>
       <div className="flex justify-between items-center gap-8 px-8 py-4 shadow-lg max-w-[1920px] mx-auto">
@@ -23,7 +24,11 @@ const Header = () => {
         <div className="w-[40%] flex justify-end items-center gap-16">
           {isLogin ? (
             <>
-              <Link to="myclasses">My Learning</Link>
+              {role === "instructor" ? (
+                <Link to="myclasses">My Classes</Link>
+              ) : (
+                <Link to="myclasses">My Learning</Link>
+              )}
               <Dashboard />
             </>
           ) : (

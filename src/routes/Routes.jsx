@@ -6,6 +6,9 @@ import ErrorPage from "../pages/Error/Error";
 import Root from "../layout/Root";
 import Instructor from "../pages/Instructor/Instructor";
 import Classes from "../pages/Classes/Classes";
+import Dashboard from "../pages/Instructor/InsDashboard/Dashboard";
+import MyClasses from "../pages/Instructor/MyClasses/MyClasses";
+import UpdateClass from "../pages/Instructor/MyClasses/UpdateClass";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,18 @@ const router = createBrowserRouter([
       {
         path: "instructors",
         element: <Instructor />,
+      },
+      {
+        path: "instructors/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "myclasses",
+        element: <MyClasses />,
+      },
+      {
+        path: "myclasses/:id",
+        element: <UpdateClass />,
       },
       {
         path: "classes",
