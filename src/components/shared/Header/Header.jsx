@@ -7,9 +7,11 @@ import Search from "./Search";
 import { Link } from "react-router-dom";
 import Dashboard from "./UserDashboard/Dashboard";
 import Category from "./Category/Category";
+import { useContext } from "react";
+import AuthContext from "../../../context/AuthContext";
 
 const Header = () => {
-  const isLogin = true;
+  const { user } = useContext(AuthContext);
   const role = "student";
   return (
     <header>
@@ -23,7 +25,7 @@ const Header = () => {
           <Search />
         </div>
         <div className="w-[40%] flex justify-end items-center gap-16">
-          {isLogin ? (
+          {user ? (
             <>
               {role === "instructor" ? (
                 <>

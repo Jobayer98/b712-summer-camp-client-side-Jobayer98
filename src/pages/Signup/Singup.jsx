@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../Login/Login.css";
 import { Radio, RadioGroup } from "react-radio-group";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import AuthContext from "../../context/AuthContext";
+import { toast } from "react-hot-toast";
+
+const notify = () => toast.success("Signup successfully");
 
 const SignUpPage = () => {
   const [error, setError] = useState(false);
@@ -12,22 +16,37 @@ const SignUpPage = () => {
   const [confirm, setconfirm] = useState(false);
   const [selectedValue, setselectedValue] = useState("male");
   const {
-    // reset,
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  // auth context
+  const { createUser } = useContext(AuthContext);
+  // navigate to home
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     if (data.password === data.con_password) {
       setError(false);
       data.gender = selectedValue;
-      console.log(data);
+      createUser(data?.email, data?.password)
+        .then((res) => {
+          if (res?.user) {
+            notify();
+            (res.user.displayName = data.name),
+              (res.user.photoURL = data.image);
+
+            navigate("/");
+          }
+        })
+        .catch((e) => console.log(e));
     } else {
       setError(true);
     }
 
-    // reset();
+    reset();
   };
 
   const handleChange = () => {
@@ -48,7 +67,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto mt-8">
+    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">
       <div className="flex flex-col gap-2 p-10 border shadow-sm">
         <h1 className="text-md font-bold mb-2">Sign up and start learning</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
