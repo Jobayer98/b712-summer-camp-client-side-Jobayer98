@@ -2,13 +2,16 @@ import { Tabs } from "antd";
 import LanguageCard from "./LanguageCard";
 const Explore = () => {
   const lists = [
-    { lang: "English", content: "lorem" },
+    { lang: "English" },
     { lang: "French" },
     { lang: "German" },
+    { lang: "Arabic" },
+    { lang: "Portuguese" },
+    { lang: "Hindi" },
   ];
   return (
     <div className="mt-16">
-      <h1 className="text-center text-3xl mb-6">Explore destinations</h1>
+      <h1 className="text-center text-3xl mb-6">Popular Language</h1>
       <Tabs
         className="flex justify-center items-center h-[500px]"
         defaultActiveKey="1"

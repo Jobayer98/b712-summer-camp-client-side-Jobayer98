@@ -9,9 +9,11 @@ import Dashboard from "./UserDashboard/Dashboard";
 import Category from "./Category/Category";
 import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
+import useCart from "../../../hooks/useCart";
 
 const Header = () => {
   const { user } = useContext(AuthContext);
+  const [cart] = useCart();
   const role = "student";
   return (
     <header>
@@ -25,9 +27,14 @@ const Header = () => {
           <Search />
         </div>
         <div className="w-[40%] flex justify-end items-center gap-16">
-          <Link to="/my-selected-classes">
-            <HiOutlineShoppingCart className="text-2xl cursor-pointer" />
-          </Link>
+          <div className="relative">
+            <Link to="/my-selected-classes ">
+              <HiOutlineShoppingCart className="text-2xl cursor-pointer" />
+              <span className="absolute bottom-4 -right-4 rounded-full bg-purple-700 px-2 pt-[1px] flex justify-center items-center text-white">
+                {cart.length || 0}
+              </span>
+            </Link>
+          </div>
           {user ? (
             <>
               {role === "instructor" ? (

@@ -1,0 +1,7 @@
+.img:hover .add_btn {
+  display: block;
+}
+
+.img > img:hover {
+  backface-visibility: hidden;
+}
