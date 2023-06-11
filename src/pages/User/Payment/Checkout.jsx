@@ -21,6 +21,7 @@ const CheckoutForm = () => {
   const [data, refetch] = useCart();
   const [clientSecret, setClientSecret] = useState("");
   const [paymentLoading, setPaymentLoading] = useState(false);
+
   const price = data.reduce((sum, item) => sum + parseFloat(item.price), 0);
 
   const [cardError, setCardError] = useState("");

@@ -40,7 +40,7 @@ const AllClasses = () => {
             <tr>
               <th>Image</th>
               <th>Course Name</th>
-              <th>Class Taken</th>
+              <th>Available Seats</th>
               <th>Price</th>
               <th>Status</th>
               <th>Actions</th>
@@ -48,7 +48,7 @@ const AllClasses = () => {
           </thead>
           <tbody>
             {data.map((item) => (
-              <tr key={item._id}>
+              <tr key={item._id} className="shadow">
                 <td>
                   <img
                     loading="lazy"
@@ -73,6 +73,12 @@ const AllClasses = () => {
                     className={`btn btn-xs   `}
                   >
                     Deny
+                  </button>
+                  <button
+                    onClick={() => handleDeny(item._id)}
+                    className={`btn btn-xs ml-2 `}
+                  >
+                    Feedback
                   </button>
                 </td>
               </tr>

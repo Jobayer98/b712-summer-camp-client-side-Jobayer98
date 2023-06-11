@@ -14,6 +14,7 @@ import MyCourses from "../pages/User/MyCourses/MyCourses";
 import PrivateRoute from "./PrivateRoute";
 import Checkout from "../pages/User/Payment/Checkout";
 import AllClasses from "../pages/Admin/AllClasses/AllClasses";
+import ManageUser from "../pages/Admin/ManageUser/ManageUser";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AllClasses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manage-users",
+        element: (
+          <PrivateRoute>
+            <ManageUser />
           </PrivateRoute>
         ),
       },

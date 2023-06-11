@@ -14,7 +14,6 @@ const notify = () => toast.success("Signup successfully");
 const SignUpPage = () => {
   const [error, setError] = useState(false);
   const [isText, setIsText] = useState(false);
-  const { role, setRole } = useContext(AuthContext);
   const [selectedValue, setselectedValue] = useState("male");
   const {
     register,
@@ -44,7 +43,6 @@ const SignUpPage = () => {
             const user = {
               name: data.name,
               email: data.email,
-              role: role,
             };
             saveUser(user);
 
@@ -77,31 +75,18 @@ const SignUpPage = () => {
         "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users",
         user
       )
-      .then((res) => {
-        checkRole(res.data);
-      });
-  };
-
-  const checkRole = (user) => {
-    if (user && user?.email) {
-      axios
-        .get(
-          `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users?email=${user?.email}`
-        )
-        .then((res) => {
-          if (res.data?.role) {
-            setRole(res.data.role);
-          }
-        });
-    }
+      .then(() => {});
   };
 
   return (
     <div className="w-full md:max-w-[480px] lg:max-w-[580px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">
       <div className="flex flex-col gap-2 p-10 border shadow-sm">
         <h1 className="text-md font-bold mb-2">Sign up and start learning</h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-          <div>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-2 mx-0"
+        >
+          <div className="w-full">
             <input
               type="text"
               className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
@@ -204,16 +189,6 @@ const SignUpPage = () => {
               placeholder="Address"
               {...register("address")}
             />
-          </div>
-          <div>
-            <select
-              onChange={(e) => setRole(e.target.value)}
-              defaultValue={"Student"}
-              className="outline-none"
-            >
-              <option value="student">Student</option>
-              <option value="instructor">Instructor</option>
-            </select>
           </div>
           <div>
             <p className="font-semibold my-2">Gender</p>
