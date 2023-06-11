@@ -7,16 +7,16 @@ import { Radio, RadioGroup } from "react-radio-group";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import AuthContext from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 const notify = () => toast.success("Signup successfully");
 
 const SignUpPage = () => {
   const [error, setError] = useState(false);
   const [isText, setIsText] = useState(false);
-  const [confirm, setconfirm] = useState(false);
+  const [role, setRole] = useState("student");
   const [selectedValue, setselectedValue] = useState("male");
   const {
-    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -38,8 +38,15 @@ const SignUpPage = () => {
         .then((res) => {
           if (res?.user) {
             notify();
-            (res.user.displayName = data.name),
-              (res.user.photoURL = data.image);
+            res.user.displayName = data.name;
+            res.user.photoURL = data.image;
+
+            const user = {
+              name: data.name,
+              email: data.email,
+              role: role,
+            };
+            saveUser(user);
 
             navigate(from, { replace: true });
           }
@@ -48,8 +55,6 @@ const SignUpPage = () => {
     } else {
       setError(true);
     }
-
-    reset();
   };
 
   const handleChange = () => {
@@ -65,8 +70,24 @@ const SignUpPage = () => {
   const handleShowPassword = () => {
     setIsText(!isText);
   };
-  const handleShowPassword2 = () => {
-    setconfirm(!isText);
+
+  const saveUser = (user) => {
+    axios.post("http://localhost:3000/users", user).then((res) => {
+      checkRole(res.data);
+    });
+  };
+
+  const checkRole = (user) => {
+    if (user && user?.email) {
+      axios
+        .get(`http://localhost:3000/users?email=${user?.email}`)
+        .then((res) => {
+          if (res.data?.role) {
+            console.log(res.data);
+            setRole(res.data.role);
+          }
+        });
+    }
   };
 
   return (
@@ -135,22 +156,12 @@ const SignUpPage = () => {
           </div>
           <div className="relative">
             <input
-              type={confirm ? "text" : "password"}
+              type="password"
               className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
               placeholder="Confirm password"
               {...register("con_password", { required: true })}
             />
-            {confirm ? (
-              <AiOutlineEyeInvisible
-                onClick={handleShowPassword2}
-                className="absolute top-5 right-2 cursor-pointer"
-              />
-            ) : (
-              <AiOutlineEye
-                onClick={handleShowPassword2}
-                className="absolute top-5 right-2 cursor-pointer"
-              />
-            )}
+
             {errors.con_password?.type === "required" && (
               <span className="text-red-500">password did not match</span>
             )}
@@ -187,6 +198,16 @@ const SignUpPage = () => {
               placeholder="Address"
               {...register("address")}
             />
+          </div>
+          <div>
+            <select
+              onChange={(e) => setRole(e.target.value)}
+              defaultValue={"Student"}
+              className="outline-none"
+            >
+              <option value="student">Student</option>
+              <option value="instructor">Instructor</option>
+            </select>
           </div>
           <div>
             <p className="font-semibold my-2">Gender</p>

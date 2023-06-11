@@ -6,12 +6,14 @@ import axios from "axios";
 import AuthContext from "../../../context/AuthContext";
 import { toast } from "react-hot-toast";
 import useCart from "../../../hooks/useCart";
+import { useNavigate } from "react-router-dom";
 
 const notify = () => toast.success("Add to cart");
 
 const Card = ({ item }) => {
   const { user } = useContext(AuthContext);
   const [, refetch] = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     Aos.init({
@@ -26,14 +28,19 @@ const Card = ({ item }) => {
       instructorName: item.instrctorName,
       availableSeats: item.availableSeats,
       price: item.price,
-      email: user.email,
+      email: user?.email,
     };
-    axios.post("http://localhost:3000/cart", selectedClass).then((res) => {
-      refetch();
-      if (res.data.insertedId) {
-        notify();
-      }
-    });
+
+    if (user && user?.email) {
+      axios.post("http://localhost:3000/cart", selectedClass).then((res) => {
+        refetch();
+        if (res.data.insertedId) {
+          notify();
+        }
+      });
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <div className="border w-full shadow" data-aos="fade-up">

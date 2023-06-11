@@ -2,7 +2,7 @@ import Card from "../../../components/UI/Card/Card";
 import useFetch from "../../../hooks/useFetch";
 
 const PopularClasses = () => {
-  const [data] = useFetch("http://localhost:3000/classes");
+  const [data] = useFetch("http://localhost:3000/allcourses");
   return (
     <div className="mt-20">
       <h1 className="text-center text-3xl mb-6">Popular Classes</h1>

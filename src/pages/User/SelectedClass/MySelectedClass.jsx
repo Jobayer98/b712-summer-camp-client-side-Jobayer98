@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 const notify = () => toast.success("Remove from cart");
 
 const MySelectedClass = () => {
-  const [cart, refetch] = useCart();
+  const [data, refetch] = useCart();
 
   const handlRemoveFromCart = (id) => {
     axios.delete(`http://localhost:3000/cart/${id}`).then((res) => {
@@ -22,11 +22,11 @@ const MySelectedClass = () => {
     <Container>
       <div className="lg:ml-32">
         <h1 className="text-4xl font-extrabold my-8">My Selected Course</h1>
-        <p className="font-semibold mb-1">{cart.length} courses in Cart</p>
+        <p className="font-semibold mb-1">{data.length} courses in Cart</p>
       </div>
       <div className=" flex justify-center gap-6">
         <div className="w-[70%] lg:w-[50%]">
-          {cart.map((item) => (
+          {data.map((item) => (
             <div key={item._id}>
               <hr />
               <div
@@ -42,15 +42,13 @@ const MySelectedClass = () => {
                   />
                 </figure>
                 <div className="px-6 my-4 flex flex-col gap-1 items-start">
-                  <h1 className="font-bold">
-                    {item.name || "English for beginner"}
-                  </h1>
+                  <h1 className="font-bold">{item.name}</h1>
                   <p className="font-normal text-gray-500">
-                    {item.instructorName || " Hiroshi Tanaka"}
+                    {item.instructorName}
                   </p>
                   <div className="mt-1">
                     <p className="text-sm text-gray-500">
-                      Available Seat: {item.availableSeats || 20}
+                      Available Seat: {item.availableSeats}
                     </p>
                   </div>
                   <button
@@ -61,7 +59,7 @@ const MySelectedClass = () => {
                   </button>
                 </div>
                 <p className="mt-4 ml-12 font-semibold tracking-wide text-[#a435f0] content-end">
-                  ${item.price || 45}
+                  ${item.price}
                 </p>
               </div>
             </div>

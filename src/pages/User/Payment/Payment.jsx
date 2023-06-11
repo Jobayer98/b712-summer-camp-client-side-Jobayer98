@@ -11,12 +11,16 @@ const Payment = () => {
     <div>
       <p className="font-bold text-gray-600 tracking-wider">Total:</p>
       <h1 className="text-3xl font-extrabold my-1 mb-4">${totalPrice}</h1>
-      <Link
-        to="/checkout"
-        className="bg-[#a435f0] hover:bg-[#8810d8] text-white font-bold py-3 w-full mt-2 px-8"
-      >
-        Checkout
-      </Link>
+      {totalPrice > 0 ? (
+        <Link
+          to="/checkout"
+          className="bg-[#a435f0] hover:bg-[#8810d8] text-white font-bold py-3 w-full mt-2 px-8"
+        >
+          Checkout
+        </Link>
+      ) : (
+        "The cart is empty"
+      )}
     </div>
   );
 };

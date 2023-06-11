@@ -13,6 +13,7 @@ import MySelectedClass from "../pages/User/SelectedClass/MySelectedClass";
 import MyCourses from "../pages/User/MyCourses/MyCourses";
 import PrivateRoute from "./PrivateRoute";
 import Checkout from "../pages/User/Payment/Checkout";
+import AllClasses from "../pages/Admin/AllClasses/AllClasses";
 
 const router = createBrowserRouter([
   {
@@ -26,11 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "instructors",
-        element: (
-          <PrivateRoute>
-            <Instructor />
-          </PrivateRoute>
-        ),
+        element: <Instructor />,
       },
       {
         path: "instructors/dashboard",
@@ -57,12 +54,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "classes",
-        element: (
-          <PrivateRoute>
-            <Classes />
-          </PrivateRoute>
-        ),
+        path: "allcourses",
+        element: <Classes />,
       },
       {
         path: "mycourses",
@@ -83,7 +76,19 @@ const router = createBrowserRouter([
 
       {
         path: "checkout",
-        element: <Checkout />,
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "allclasses",
+        element: (
+          <PrivateRoute>
+            <AllClasses />
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",

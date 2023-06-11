@@ -2,7 +2,8 @@ import Container from "../../../components/shared/Container";
 import useFetch from "../../../hooks/useFetch";
 
 const MyCourses = () => {
-  const [data] = useFetch("http://localhost:3000/payments");
+  // const [data] = useFetch("http://localhost:3000/payments");
+  const data = [1, 2, 3, 4];
   return (
     <Container>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 lg:gap-4 self-center content-center my-12">

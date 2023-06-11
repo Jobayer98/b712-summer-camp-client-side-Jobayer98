@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 
 const notify = () => toast.success("Login successfully");
 
@@ -17,8 +18,13 @@ const LoginPage = () => {
   const passRef = useRef();
   const location = useLocation();
   const navigate = useNavigate();
-  const { login, loginWithGoogle, loginWithFacebook, loginWithGithub } =
-    useContext(AuthContext);
+  const {
+    login,
+    loginWithGoogle,
+    loginWithFacebook,
+    loginWithGithub,
+    setRole,
+  } = useContext(AuthContext);
 
   const from = location.state?.form?.pathname || "/";
 
@@ -31,7 +37,11 @@ const LoginPage = () => {
       .then((res) => {
         setError(false);
         if (res?.user) {
+          console.log(res.user);
+          checkRole(res.user);
           notify();
+          res.user.displayName = data.name;
+          res.user.photoURL = data.image;
           navigate(from, { replace: true });
         }
       })
@@ -85,6 +95,18 @@ const LoginPage = () => {
       .catch(() => {
         setError(true);
       });
+  };
+
+  const checkRole = (user) => {
+    if (user && user?.email) {
+      axios
+        .get(`http://localhost:3000/users?email=${user?.email}`)
+        .then((res) => {
+          if (res.data?.role) {
+            setRole(res.data.role);
+          }
+        });
+    }
   };
   return (
     <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">

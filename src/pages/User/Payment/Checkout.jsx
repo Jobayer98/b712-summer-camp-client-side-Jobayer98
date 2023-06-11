@@ -31,7 +31,6 @@ const CheckoutForm = () => {
     axios
       .post("http://localhost:3000/create-payment-intent", { price })
       .then((res) => {
-        console.log(res.data);
         setClientSecret(res.data.clientSecret);
       });
   }, [price]);

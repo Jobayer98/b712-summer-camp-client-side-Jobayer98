@@ -2,14 +2,13 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 import { useContext } from "react";
 import AuthContext from "../../../../context/AuthContext";
-const Dashboard = () => {
+const Dashboard = ({ role }) => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
     navigate("/");
   };
-  const role = "student";
   return (
     <div className="drop_down cursor-pointer">
       <div className="relative">
@@ -37,14 +36,33 @@ const Dashboard = () => {
           </div>
           <hr />
           <div className="flex flex-col gap-2 py-2 px-8">
-            {role === "instructor" ? (
-              <Link to="/myclasses" className="hover:text-orange-700">
-                My Classes
-              </Link>
-            ) : (
+            {role === "instructor" && (
+              <>
+                <Link to="/myclasses" className="hover:text-orange-700">
+                  My Classes
+                </Link>
+                <Link
+                  to="/instructors/dashboard"
+                  className="hover:text-orange-700"
+                >
+                  Add a new course
+                </Link>
+              </>
+            )}
+            {role === "student" && (
               <Link to="/mycourses" className="hover:text-orange-700">
                 My Learning
               </Link>
+            )}
+            {role === "admin" && (
+              <>
+                <Link to="/allclasses" className="hover:text-orange-700">
+                  All Course
+                </Link>
+                <Link to="/instructors" className="hover:text-orange-700">
+                  All Instructors
+                </Link>
+              </>
             )}
             <Link className="hover:text-orange-700">Notification</Link>
             <Link className="hover:text-orange-700">Message</Link>
