@@ -29,7 +29,10 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3000/create-payment-intent", { price })
+      .post(
+        "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/create-payment-intent",
+        { price }
+      )
       .then((res) => {
         setClientSecret(res.data.clientSecret);
       });
@@ -55,7 +58,6 @@ const CheckoutForm = () => {
     });
 
     if (error) {
-      console.log("[error]", error);
       setCardError(error.message);
     } else {
       setCardError("");
@@ -88,9 +90,11 @@ const CheckoutForm = () => {
           };
 
           axios
-            .post("http://localhost:3000/payments", payment)
+            .post(
+              "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/payments",
+              payment
+            )
             .then((res) => {
-              console.log(res);
               if (res.data.deleteResult.deletedCount > 0) {
                 refetch();
               } else {
@@ -98,9 +102,7 @@ const CheckoutForm = () => {
                 setPaymentLoading(false);
               }
             })
-            .catch((e) => {
-              console.log(e);
-            });
+            .catch(() => {});
         }
       });
   };

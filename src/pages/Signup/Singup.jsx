@@ -14,7 +14,7 @@ const notify = () => toast.success("Signup successfully");
 const SignUpPage = () => {
   const [error, setError] = useState(false);
   const [isText, setIsText] = useState(false);
-  const [role, setRole] = useState("student");
+  const { role, setRole } = useContext(AuthContext);
   const [selectedValue, setselectedValue] = useState("male");
   const {
     register,
@@ -51,7 +51,7 @@ const SignUpPage = () => {
             navigate(from, { replace: true });
           }
         })
-        .catch((e) => console.log(e));
+        .catch(() => {});
     } else {
       setError(true);
     }
@@ -72,18 +72,24 @@ const SignUpPage = () => {
   };
 
   const saveUser = (user) => {
-    axios.post("http://localhost:3000/users", user).then((res) => {
-      checkRole(res.data);
-    });
+    axios
+      .post(
+        "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users",
+        user
+      )
+      .then((res) => {
+        checkRole(res.data);
+      });
   };
 
   const checkRole = (user) => {
     if (user && user?.email) {
       axios
-        .get(`http://localhost:3000/users?email=${user?.email}`)
+        .get(
+          `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users?email=${user?.email}`
+        )
         .then((res) => {
           if (res.data?.role) {
-            console.log(res.data);
             setRole(res.data.role);
           }
         });
@@ -91,14 +97,14 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">
+    <div className="w-full md:max-w-[480px] lg:max-w-[580px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">
       <div className="flex flex-col gap-2 p-10 border shadow-sm">
         <h1 className="text-md font-bold mb-2">Sign up and start learning</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
           <div>
             <input
               type="text"
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
               placeholder="Full name"
               {...register("name", { required: true })}
             />
@@ -109,7 +115,7 @@ const SignUpPage = () => {
           <div>
             <input
               type="email"
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
               placeholder="Email"
               {...register("email", { required: true })}
             />
@@ -120,7 +126,7 @@ const SignUpPage = () => {
           <div className="relative">
             <input
               type={isText ? "text" : "password"}
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
               placeholder="Password"
               {...register("password", {
                 required: true,
@@ -157,7 +163,7 @@ const SignUpPage = () => {
           <div className="relative">
             <input
               type="password"
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
               placeholder="Confirm password"
               {...register("con_password", { required: true })}
             />
@@ -173,7 +179,7 @@ const SignUpPage = () => {
           <div>
             <input
               type="url"
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
               name="image"
               id="image"
               placeholder="http://www.example.com"
@@ -182,7 +188,7 @@ const SignUpPage = () => {
           </div>
           <div>
             <input
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
               type="number"
               name="phone"
               id="phone"
@@ -192,7 +198,7 @@ const SignUpPage = () => {
           </div>
           <div>
             <input
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
               type="text"
               name="address"
               placeholder="Address"
@@ -212,24 +218,24 @@ const SignUpPage = () => {
           <div>
             <p className="font-semibold my-2">Gender</p>
             <RadioGroup
-              className="flex gap-3"
+              className="flex items-center gap-2"
               name="fruit"
               selectedValue={selectedValue}
               onChange={handleChange}
             >
-              <label htmlFor="male">
-                <Radio value="male" className="mr-1" />
+              <Radio value="male" className="mr-1 w-fit " />
+              <label htmlFor="male" className="mr-4 -mt-2">
                 Male
               </label>
-              <label htmlFor="female">
-                <Radio value="female" className="mr-1" />
+              <Radio value="female" className="mr-1 w-fit" />
+              <label htmlFor="female" className="-mt-2">
                 Female
               </label>
             </RadioGroup>
           </div>
           <button
             type="submit"
-            className="bg-[#a435f0] hover:bg-[#8810d8] py-3 w-full mt-3 text-white font-bold"
+            className="bg-[#a435f0] hover:bg-[#8810d8] pt-[2px]  w-full mt-3 text-white font-bold"
           >
             Signup
           </button>

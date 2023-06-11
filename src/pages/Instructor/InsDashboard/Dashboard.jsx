@@ -3,6 +3,9 @@ import Container from "../../../components/shared/Container";
 import axios from "axios";
 import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
+import { toast } from "react-hot-toast";
+
+const notify = () => toast.success("Signup successfully");
 
 const Dashboard = () => {
   const { register, handleSubmit } = useForm();
@@ -10,9 +13,16 @@ const Dashboard = () => {
 
   const onSubmit = (data) => {
     axios
-      .post("http://localhost:3000/add-class", data)
-      .then((res) => console.log(res.data))
-      .catch((e) => console.log(e));
+      .post(
+        "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/add-class",
+        data
+      )
+      .then((res) => {
+        if (res.data) {
+          notify();
+        }
+      })
+      .catch(() => {});
   };
   return (
     <Container>

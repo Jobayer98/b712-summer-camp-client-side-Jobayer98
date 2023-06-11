@@ -8,7 +8,7 @@ import AuthContext from "../../../context/AuthContext";
 const MyClasses = () => {
   const { user } = useContext(AuthContext);
   const [data] = useFetch(
-    `http://localhost:3000/myclasses?email=${user?.email}`
+    `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/myclasses?email=${user?.email}`
   );
   return (
     <Container>

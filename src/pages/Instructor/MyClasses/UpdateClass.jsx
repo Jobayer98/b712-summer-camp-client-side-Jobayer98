@@ -7,14 +7,19 @@ import axios from "axios";
 const UpdateClass = () => {
   const { id } = useParams();
   const { register, handleSubmit } = useForm();
-  const [data] = useFetch(`http://localhost:3000/myclasses/${id}`);
+  const [data] = useFetch(
+    `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/myclasses/${id}`
+  );
   const { name, email, instructorName, availableSeats, price, image } = data;
 
   const onSubmit = (data) => {
     axios
-      .put(`http://localhost:3000/myclasses/${id}`, data)
-      .then((res) => console.log(res.data))
-      .catch((e) => console.log(e));
+      .put(
+        `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/myclasses/${id}`,
+        data
+      )
+      .then(() => {})
+      .catch(() => {});
   };
   return (
     <Container>

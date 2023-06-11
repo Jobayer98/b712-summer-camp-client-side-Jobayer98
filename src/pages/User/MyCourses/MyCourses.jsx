@@ -2,7 +2,7 @@ import Container from "../../../components/shared/Container";
 import useFetch from "../../../hooks/useFetch";
 
 const MyCourses = () => {
-  // const [data] = useFetch("http://localhost:3000/payments");
+  // const [data] = useFetch("https://b7a12-summer-camp-server-side-jobayer981.vercel.app/payments");
   const data = [1, 2, 3, 4];
   return (
     <Container>

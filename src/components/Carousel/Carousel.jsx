@@ -23,7 +23,7 @@ const Carousel = () => {
       }}
       navigation={true}
       modules={[Autoplay, Navigation]}
-      className="mySwiper "
+      className="mySwiper"
     >
       <SwiperSlide>
         <img loading="lazy" src={img_1} alt="" />

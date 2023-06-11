@@ -9,7 +9,7 @@ const useCart = () => {
     queryKey: ["cart", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:3000/cart?email=${user?.email}`
+        `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/cart?email=${user?.email}`
       );
 
       return res.data;

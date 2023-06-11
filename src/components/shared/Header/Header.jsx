@@ -14,7 +14,6 @@ import useCart from "../../../hooks/useCart";
 const Header = () => {
   const { user, role } = useContext(AuthContext);
   const [data] = useCart();
-  console.log(role);
   return (
     <header>
       <div className="flex justify-between items-center gap-8 px-8 py-4 shadow-lg max-w-[1920px] mx-auto">
@@ -25,10 +24,10 @@ const Header = () => {
           <Category />
         </div>
         <div className="w-[30%] relative">
-          <BsSearch className="absolute top-[10px] left-3" />
+          <BsSearch className="absolute top-[20px] left-3" />
           <Search />
         </div>
-        <div className="w-[40%] flex justify-end items-center gap-16">
+        <div className="w-[40%] flex justify-end items-center gap-4">
           <Link to="/allcourses">Courses</Link>
           <Link to="/instructors">Instructors</Link>
           <div className="relative">

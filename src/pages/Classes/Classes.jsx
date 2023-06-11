@@ -12,7 +12,9 @@ import { useNavigate } from "react-router-dom";
 const notify = () => toast.success("Add to cart");
 
 const Classes = () => {
-  const [data] = useFetch("http://localhost:3000/allcourses");
+  const [data] = useFetch(
+    "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/allcourses"
+  );
   const [, refetch] = useCart();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -34,12 +36,17 @@ const Classes = () => {
     };
 
     if (user && user?.email) {
-      axios.post("http://localhost:3000/cart", selectedClass).then((res) => {
-        refetch();
-        if (res.data.insertedId) {
-          notify();
-        }
-      });
+      axios
+        .post(
+          "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/cart",
+          selectedClass
+        )
+        .then((res) => {
+          refetch();
+          if (res.data.insertedId) {
+            notify();
+          }
+        });
     } else {
       navigate("/login");
     }
@@ -47,7 +54,7 @@ const Classes = () => {
 
   return (
     <Container>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-4 self-center content-center my-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-4 self-center content-center my-12">
         {data.map((item) => (
           <div
             key={item._id}
@@ -57,7 +64,7 @@ const Classes = () => {
             <figure>
               <img
                 loading="lazy"
-                className="h-60 w-full"
+                className="h-52 w-full hover:scale-110 transition-all ease-in-out duration-500"
                 src="https://assets.dulwich.org/thumbs/schools/fit/472x256/wechat-image-20210902150627-20210922-151534-393.jpg"
                 alt=""
               />
@@ -73,7 +80,7 @@ const Classes = () => {
             <div className="text-center">
               <button
                 onClick={() => handleAddToCart(item)}
-                className="border-[1px] text-white px-4 py-2 rounded text-sm"
+                className="text-white text-sm px- py-[1px] capitalize bg-[#a435f0] hover:bg-[#8810d8] hover:scale-110"
               >
                 Add to cart
               </button>

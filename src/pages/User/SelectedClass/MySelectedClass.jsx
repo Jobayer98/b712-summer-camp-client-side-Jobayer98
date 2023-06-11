@@ -11,12 +11,16 @@ const MySelectedClass = () => {
   const [data, refetch] = useCart();
 
   const handlRemoveFromCart = (id) => {
-    axios.delete(`http://localhost:3000/cart/${id}`).then((res) => {
-      if (res.data.deletedCount > 0) {
-        notify();
-        refetch();
-      }
-    });
+    axios
+      .delete(
+        `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/cart/${id}`
+      )
+      .then((res) => {
+        if (res.data.deletedCount > 0) {
+          notify();
+          refetch();
+        }
+      });
   };
   return (
     <Container>

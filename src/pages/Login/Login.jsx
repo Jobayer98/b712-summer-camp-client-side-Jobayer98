@@ -23,6 +23,7 @@ const LoginPage = () => {
     loginWithGoogle,
     loginWithFacebook,
     loginWithGithub,
+    role,
     setRole,
   } = useContext(AuthContext);
 
@@ -37,7 +38,6 @@ const LoginPage = () => {
       .then((res) => {
         setError(false);
         if (res?.user) {
-          console.log(res.user);
           checkRole(res.user);
           notify();
           res.user.displayName = data.name;
@@ -57,6 +57,13 @@ const LoginPage = () => {
         setError(false);
         if (res?.user) {
           notify();
+
+          const user = {
+            name: res.user.displayName,
+            email: res.user.email,
+            role: role,
+          };
+          saveUser(user);
           navigate(from, { replace: true });
         }
       })
@@ -73,6 +80,12 @@ const LoginPage = () => {
         setError(false);
         if (res?.user) {
           notify();
+          const user = {
+            name: res.user.displayName,
+            email: res.user.email,
+            role: role,
+          };
+          saveUser(user);
           navigate(from, { replace: true });
         }
       })
@@ -89,6 +102,12 @@ const LoginPage = () => {
         setError(false);
         if (res?.user) {
           notify();
+          const user = {
+            name: res.user.displayName,
+            email: res.user.email,
+            role: role,
+          };
+          saveUser(user);
           navigate(from, { replace: true });
         }
       })
@@ -97,10 +116,23 @@ const LoginPage = () => {
       });
   };
 
+  const saveUser = (user) => {
+    axios
+      .post(
+        "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users",
+        user
+      )
+      .then((res) => {
+        checkRole(res.data);
+      });
+  };
+
   const checkRole = (user) => {
     if (user && user?.email) {
       axios
-        .get(`http://localhost:3000/users?email=${user?.email}`)
+        .get(
+          `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users?email=${user?.email}`
+        )
         .then((res) => {
           if (res.data?.role) {
             setRole(res.data.role);
@@ -109,10 +141,10 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="w-full md:max-w-[480px] lg:max-w-[480px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">
-      <div className="flex flex-col gap-2 p-10 border shadow-sm">
-        <h1 className="text-md font-bold mb-2">Log in to your account</h1>
-        <div className="flex flex-col gap-2">
+    <div className="w-full md:max-w-[480px] lg:max-w-[500px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">
+      <div className="flex flex-col gap-2 p-10 border  shadow-sm">
+        <h1 className="text-md font-bold mb-2 px-5">Log in to your account</h1>
+        <div className="flex flex-col gap-2 px-5 mb-5">
           <button
             onClick={handleLoginGoogle}
             className="border-[1px] border-black py-[10px] flex justify-start items-center gap-2 font-bold pl-3"
@@ -136,7 +168,7 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
           <div>
             <input
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 w-full input_field"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 w-full input_field"
               type="email"
               placeholder="Email"
               {...register("email", { required: true })}
@@ -145,7 +177,7 @@ const LoginPage = () => {
           <div className="relative">
             <input
               ref={passRef}
-              className="border-[1px] border-black inline-block outline-none px-3 py-4 input_field w-full"
+              className="border-[1px] border-black inline-block outline-none px-3 py-3 input_field w-full"
               type={isText ? "text" : "password"}
               placeholder="Password"
               {...register("password", { required: true })}
@@ -153,12 +185,12 @@ const LoginPage = () => {
             {isText ? (
               <AiOutlineEyeInvisible
                 onClick={handleShowPassword}
-                className="absolute top-5 right-2 cursor-pointer"
+                className="absolute top-6 right-2 cursor-pointer"
               />
             ) : (
               <AiOutlineEye
                 onClick={handleShowPassword}
-                className="absolute top-5 right-2 cursor-pointer"
+                className="absolute top-6 right-2 cursor-pointer"
               />
             )}
             {error && (
@@ -168,7 +200,7 @@ const LoginPage = () => {
             )}
           </div>
           <button
-            className="bg-[#a435f0] hover:bg-[#8810d8] py-3 w-full mt-3 text-white font-bold"
+            className="bg-[#a435f0] hover:bg-[#8810d8] pt-[2px]  w-full mt-3 text-white font-bold"
             type="submit"
           >
             Log in
@@ -176,13 +208,13 @@ const LoginPage = () => {
         </form>
         <div className="text-center my-2">
           <span className="font-normal mr-1">or</span>
-          <Link className="font-bold underline text-[#a435f0]" to="#">
+          <Link className="font-bold text-sm underline text-[#a435f0]" to="#">
             Frogot Password
           </Link>
         </div>
         <hr />
         <div className="text-center">
-          <span>
+          <span className="text-sm">
             {"Don't have an account? "}
             <Link
               className="font-semibold underline text-[#a435f0]"

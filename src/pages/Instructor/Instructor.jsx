@@ -3,7 +3,9 @@ import Container from "../../components/shared/Container";
 import { Link } from "react-router-dom";
 
 const Instructor = () => {
-  const [data] = useFetch("http://localhost:3000/instructors");
+  const [data] = useFetch(
+    "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/instructors"
+  );
 
   return (
     <Container>

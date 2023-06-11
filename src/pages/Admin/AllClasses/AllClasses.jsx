@@ -5,11 +5,15 @@ import useCart from "../../../hooks/useCart";
 
 const AllClasses = () => {
   const { refetch } = useCart();
-  const [data] = useFetch("http://localhost:3000/courses");
+  const [data] = useFetch(
+    "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/courses"
+  );
 
   const handleApprove = (id) => {
     axios
-      .patch(`http://localhost:3000/courses/${id}?status=approved`)
+      .patch(
+        `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/courses/${id}?status=approved`
+      )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           refetch();
@@ -18,7 +22,9 @@ const AllClasses = () => {
   };
   const handleDeny = (id) => {
     axios
-      .patch(`http://localhost:3000/courses/${id}?status=denied`)
+      .patch(
+        `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/courses/${id}?status=denied`
+      )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           refetch();
