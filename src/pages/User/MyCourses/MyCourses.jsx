@@ -1,7 +1,8 @@
 import Container from "../../../components/shared/Container";
+import useFetch from "../../../hooks/useFetch";
 
 const MyCourses = () => {
-  const data = [1, 2, 3, 4];
+  const [data] = useFetch("http://localhost:3000/payments");
   return (
     <Container>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12 lg:gap-4 self-center content-center my-12">
@@ -13,6 +14,7 @@ const MyCourses = () => {
           >
             <figure>
               <img
+                loading="lazy"
                 className="h-40 w-full"
                 src="https://assets.dulwich.org/thumbs/schools/fit/472x256/wechat-image-20210902150627-20210922-151534-393.jpg"
                 alt=""

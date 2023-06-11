@@ -12,6 +12,7 @@ import UpdateClass from "../pages/Instructor/MyClasses/UpdateClass";
 import MySelectedClass from "../pages/User/SelectedClass/MySelectedClass";
 import MyCourses from "../pages/User/MyCourses/MyCourses";
 import PrivateRoute from "./PrivateRoute";
+import Checkout from "../pages/User/Payment/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,11 @@ const router = createBrowserRouter([
             <MySelectedClass />
           </PrivateRoute>
         ),
+      },
+
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
       {
         path: "login",

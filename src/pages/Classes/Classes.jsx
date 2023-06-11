@@ -23,6 +23,7 @@ const Classes = () => {
           >
             <figure>
               <img
+                loading="lazy"
                 className="h-60 w-full"
                 src="https://assets.dulwich.org/thumbs/schools/fit/472x256/wechat-image-20210902150627-20210922-151534-393.jpg"
                 alt=""

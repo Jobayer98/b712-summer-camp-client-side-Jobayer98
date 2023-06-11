@@ -9,6 +9,25 @@ const Explore = () => {
     { lang: "Portuguese" },
     { lang: "Hindi" },
   ];
+
+  const languages = [
+    [
+      {
+        name: "1",
+      },
+      {
+        name: "2",
+      },
+      {
+        name: "3",
+      },
+    ],
+    [
+      {
+        name: "1",
+      },
+    ],
+  ];
   return (
     <div className="mt-16">
       <h1 className="text-center text-3xl mb-6">Popular Language</h1>
@@ -21,7 +40,15 @@ const Explore = () => {
           return {
             label: `${item.lang}`,
             key: id,
-            children: <LanguageCard lang={item.lang} />,
+            children: (
+              <div className="flex gap-4">
+                {languages.map((item) =>
+                  item.map((i) => {
+                    <LanguageCard key={i.name} lang={item.lang} />;
+                  })
+                )}
+              </div>
+            ),
           };
         })}
       />

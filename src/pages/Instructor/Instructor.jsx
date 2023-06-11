@@ -24,7 +24,7 @@ const Instructor = () => {
             {data.map((item) => (
               <tr key={item._id}>
                 <td>
-                  <img src={item.image} alt={item.name} />
+                  <img loading="lazy" src={item.image} alt={item.name} />
                 </td>
                 <td>{item.name}</td>
                 <td>{item.email}</td>

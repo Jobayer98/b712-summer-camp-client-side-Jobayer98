@@ -1,32 +1,41 @@
 import Container from "../../../components/shared/Container";
 import Payment from "../Payment/Payment";
 import useCart from "../../../hooks/useCart";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 // import { useState } from "react";
 
-const MySelectedClass = () => {
-  const [data] = useCart();
-  // const [items, setItems] = useState(data);
+const notify = () => toast.success("Remove from cart");
 
-  // const handlRemoveFromCart = (id) => {
-  //   const updateCart = data.filter((item) => item._id != id);
-  //   setItems(updateCart);
-  // };
+const MySelectedClass = () => {
+  const [cart, refetch] = useCart();
+
+  const handlRemoveFromCart = (id) => {
+    axios.delete(`http://localhost:3000/cart/${id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        notify();
+        refetch();
+      }
+    });
+  };
   return (
     <Container>
-      <h1 className="text-4xl font-extrabold my-8">My Selected Course</h1>
-      <p className="font-semibold mb-1">{data.length} courses in Cart</p>
+      <div className="lg:ml-32">
+        <h1 className="text-4xl font-extrabold my-8">My Selected Course</h1>
+        <p className="font-semibold mb-1">{cart.length} courses in Cart</p>
+      </div>
       <div className=" flex justify-center gap-6">
-        <div className="w-[70%]">
-          {data.map((item) => (
-            <>
+        <div className="w-[70%] lg:w-[50%]">
+          {cart.map((item) => (
+            <div key={item._id}>
               <hr />
               <div
-                key={item._id}
-                className="p-4 hover:shadow-lg hover:border flex justify-center"
+                className="p-4 hover:shadow-lg hover:border flex justify-start"
                 data-aos="fade-right"
               >
                 <figure>
                   <img
+                    loading="lazy"
                     className="h-32 w-full"
                     src="https://assets.dulwich.org/thumbs/schools/fit/472x256/wechat-image-20210902150627-20210922-151534-393.jpg"
                     alt=""
@@ -45,8 +54,8 @@ const MySelectedClass = () => {
                     </p>
                   </div>
                   <button
-                    // onClick={() => handlRemoveFromCart(item._id)}
-                    className="text-xs mt-3 text-[#8732c0] border px-3 py-1 hover:border-[#8732c0]"
+                    onClick={() => handlRemoveFromCart(item._id)}
+                    className="text-xs mt-3 bg-white text-[#8732c0] border px-3 py-1 hover:border-[#8732c0]"
                   >
                     Remove
                   </button>
@@ -55,7 +64,7 @@ const MySelectedClass = () => {
                   ${item.price || 45}
                 </p>
               </div>
-            </>
+            </div>
           ))}
         </div>
         <div className="w-[30%]">

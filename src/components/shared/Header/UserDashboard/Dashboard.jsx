@@ -13,12 +13,17 @@ const Dashboard = () => {
   return (
     <div className="drop_down cursor-pointer">
       <div className="relative">
-        <img className="w-10 h-10 rounded-full" src={user.photoURL} />
+        <img
+          loading="lazy"
+          className="w-10 h-10 rounded-full"
+          src={user.photoURL}
+        />
       </div>
       <div className="dropdown_list bg-white shadow absolute right-8 invisible mt-1 z-10">
         <div className="py-4 flex flex-col gap-4">
           <div className="flex justify-between items-center gap-2 px-8">
             <img
+              loading="lazy"
               className="w-16 h-16 rounded-full"
               src={user.photoURL}
               alt={user.displayName}

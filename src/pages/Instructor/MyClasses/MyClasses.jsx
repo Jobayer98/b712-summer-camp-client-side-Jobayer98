@@ -26,7 +26,12 @@ const MyClasses = () => {
             {data.map((item) => (
               <tr key={item._id}>
                 <td>
-                  <img className="h-12" src={item.image} alt={item.name} />
+                  <img
+                    loading="lazy"
+                    className="h-12"
+                    src={item.image}
+                    alt={item.name}
+                  />
                 </td>
                 <td>{item.name}</td>
                 <td>{item.availableSeats}</td>

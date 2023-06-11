@@ -38,7 +38,7 @@ const Card = ({ item }) => {
   return (
     <div className="border w-full shadow" data-aos="fade-up">
       <figure className="img flex justify-center">
-        <img className="w-96" src={item?.image} alt="card_img" />
+        <img loading="lazy" className="w-96" src={item?.image} alt="card_img" />
       </figure>
       <div className="px-4">
         <h1 className="text-xl my-3">{item?.name}</h1>
@@ -51,7 +51,7 @@ const Card = ({ item }) => {
       <div className="px-4 mb-3">
         <button
           onClick={handleAddToCart}
-          className="bg-[#8a18d6] text-white px-3 py-1"
+          className="bg-[#8a18d6] text-white px-3 py-[1px]"
         >
           Add to cart
         </button>

@@ -19,7 +19,9 @@ const Header = () => {
     <header>
       <div className="flex justify-between items-center gap-8 px-8 py-4 shadow-lg max-w-[1920px] mx-auto">
         <div className="w-[30%] flex items-center gap-12">
-          <Link to="/">logo</Link>
+          <Link to="/" className="text-xl font-bold font-['cursive']">
+            GlobalSpeak
+          </Link>
           <Category />
         </div>
         <div className="w-[30%] relative">
