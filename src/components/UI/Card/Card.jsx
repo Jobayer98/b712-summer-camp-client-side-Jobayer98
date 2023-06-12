@@ -1,5 +1,6 @@
 import Aos from "aos";
 import { useContext, useEffect } from "react";
+import { FaUserAlt } from "react-icons/fa";
 
 import "./Card.css";
 import axios from "axios";
@@ -48,32 +49,46 @@ const Card = ({ item }) => {
     }
   };
   return (
-    <div className="border w-full shadow" data-aos="fade-up">
-      <figure className="">
-        <img
-          loading="lazy"
-          className="w-96 hover:scale-105 transition-all ease-in-out duration-500"
-          src={
-            "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
-          }
-          alt="card_img"
-        />
-      </figure>
-      <div className="px-4">
-        <h1 className="text-md my-3 font-bold">{item?.name}</h1>
-        <h2 className="text-xl mb-3">{item?.instrctorName}</h2>
-        <div className="">
-          <p className="text-sm mb-3">Price: ${item?.price}</p>
-          <p className="text-sm mb-3">AvailableSeats: {item?.availableSeats}</p>
-        </div>
+    <div
+      className="w-full drop-shadow-md bg-white rounded-lg overflow-clip"
+      data-aos="fade-up"
+    >
+      <div className="relative">
+        <figure className="">
+          <img
+            loading="lazy"
+            className="w-96 hover:scale-105 transition-all ease-in-out duration-500"
+            src={
+              "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
+            }
+            alt="card_img"
+          />
+          <img
+            className="h-10 w-10 rounded-full ring ring-gray-200 border-[1px] absolute -bottom-5 left-6"
+            src="https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
+            alt=""
+          />
+        </figure>
       </div>
-      <div className="px-4 mb-3">
-        <button
-          onClick={handleAddToCart}
-          className="text-white text-sm px- py-[1px] capitalize bg-[#a435f0] hover:bg-[#8810d8] hover:scale-110"
-        >
-          Add to cart
-        </button>
+      <div className="px-4 mt-8">
+        <div className="flex justify-between items-center">
+          <p className="text-xs text-purple-700">
+            {item?.instrctorName || "Instructor"}
+          </p>
+          <p className="text-sm mb-2 flex gap-1 items-center">
+            <FaUserAlt className="text-purple-700" />
+            {item?.availableSeats}
+          </p>
+        </div>
+
+        <h1 className="text-md my-3 font-bold">{item?.name}</h1>
+        <p className="text-sm mb-2 font-bold">${item?.price}</p>
+      </div>
+      <div
+        onClick={handleAddToCart}
+        className="px-4 text-sm font-bold  hover:bg-purple-700 transition-all duration-500 hover:text-white text-center py-2 cursor-pointer capitalize"
+      >
+        Add to cart
       </div>
     </div>
   );

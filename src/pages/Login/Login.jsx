@@ -121,20 +121,20 @@ const LoginPage = () => {
         <div className="flex flex-col gap-2 text-sm">
           <span
             onClick={handleLoginGoogle}
-            className="border-[1px] bg-white shadow hover:bg-white py-[10px] flex justify-start items-center gap-2 font-bold pl-3"
+            className="border-[1px] bg-white shadow hover:bg-white py-[10px] flex justify-start items-center gap-2 font-bold pl-3 cursor-pointer"
           >
             <FcGoogle className="text-3xl" /> Continue with Google
           </span>
           <span
             onClick={handLoginFacebook}
-            className="border-[1px] bg-white hover:bg-white shadow py-[10px] flex justify-start items-center gap-2 font-bold pl-3 "
+            className="border-[1px] bg-white hover:bg-white shadow py-[10px] flex justify-start items-center gap-2 font-bold pl-3 cursor pointer"
           >
             <BsFacebook className="text-3xl text-[#3b5998]" /> Continue with
             Facebook
           </span>
           <span
             onClick={handleLoginGithub}
-            className="border-[1px] bg-white hover:bg-white shadow py-[10px] flex justify-start items-center gap-2 font-bold pl-3 "
+            className="border-[1px] bg-white hover:bg-white shadow py-[10px] flex justify-start items-center gap-2 font-bold pl-3 cursor-pointer"
           >
             <BsGithub className="text-3xl" /> Continue with Github
           </span>
