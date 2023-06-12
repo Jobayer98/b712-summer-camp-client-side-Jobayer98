@@ -4,7 +4,9 @@ import useFetch from "../../../hooks/useFetch";
 import { useState } from "react";
 
 const ManageUser = () => {
-  const [data] = useFetch("http://localhost:3000/users");
+  const [data] = useFetch(
+    "https://b7a12-summer-camp-server-side-jobayer981.vercel.app0/users"
+  );
 
   return (
     <Container>
@@ -39,13 +41,17 @@ const TableRow = ({ item }) => {
     item.role = "instructor";
     setDisable(true);
     setAdmin(false);
-    axios.patch(`http://localhost:3000/users/${id}?role=instructor`);
+    axios.patch(
+      `https://b7a12-summer-camp-server-side-jobayer981.vercel.app0/users/${id}?role=instructor`
+    );
   };
   const handleAdmin = (id) => {
     item.role = "admin";
     setDisable(false);
     setAdmin(true);
-    axios.patch(`http://localhost:3000/users/${id}?role=admin`);
+    axios.patch(
+      `https://b7a12-summer-camp-server-side-jobayer981.vercel.app0/users/${id}?role=admin`
+    );
   };
   return (
     <tr className="shadow">

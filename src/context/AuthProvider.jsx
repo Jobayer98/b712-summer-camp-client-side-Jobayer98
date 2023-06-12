@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 
 const AuthProvider = ({ children }) => {
-  const [role, setRole] = useState("student");
+  const [role, setRole] = useState("admin");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 

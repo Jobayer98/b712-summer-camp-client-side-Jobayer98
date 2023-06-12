@@ -58,9 +58,7 @@ const Card = ({ item }) => {
           <img
             loading="lazy"
             className="w-96 hover:scale-105 transition-all ease-in-out duration-500"
-            src={
-              "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
-            }
+            src={item.image}
             alt="card_img"
           />
           <img
