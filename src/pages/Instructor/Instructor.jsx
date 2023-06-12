@@ -31,9 +31,17 @@ const Instructor = () => {
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.classesTaken}</td>
-                <td>{item.classNames.length}</td>
                 <td>
-                  <Link>See Classes</Link>
+                  <ul>
+                    {item.classNames.map((item, i) => (
+                      <li key={i} className="list-disc">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+                <td>
+                  <Link className="btn btn-xs capitalize">See Classes</Link>
                 </td>
               </tr>
             ))}

@@ -57,7 +57,7 @@ const MySelectedClass = () => {
                   </div>
                   <button
                     onClick={() => handlRemoveFromCart(item._id)}
-                    className="text-xs mt-3 bg-white text-[#8732c0] border px-3 py-1 hover:border-[#8732c0]"
+                    className="text-xs mt-3 bg-white text-[#8732c0] border px-3 py-1 hover:border-[#8732c0] hover:bg-transparent hover:text-purple-600"
                   >
                     Remove
                   </button>

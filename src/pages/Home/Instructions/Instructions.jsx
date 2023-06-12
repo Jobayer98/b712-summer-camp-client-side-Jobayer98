@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import img1 from "../../../assets/img/inst1.jpg";
 import img2 from "../../../assets/img/inst2.jpg";
+import img3 from "../../../assets/teacher.png";
+import img4 from "../../../assets/learning.png";
+
 const Instructions = () => {
   return (
-    <div className="flex justify-between items-center overflow-clip">
+    <div className="flex justify-center lg:justify-between items-center overflow-clip">
       <div className="w-1/2">
         <div className="flex flex-col gap-4 mb-8">
           <p className="text-sm text-purple-600 ">Introductions</p>
@@ -18,13 +21,13 @@ const Instructions = () => {
         </div>
         <div className="flex ">
           <div className="flex gap-4 items-center">
-            <img className="w-20 h-20 bg-gray-400" src="" alt="" />
+            <img className="w-20 h-20" src={img3} alt="teaching" />
             <p className="w-1/2 font-semibold">
               Start Learining form our experts trainer
             </p>
           </div>
           <div className="flex gap-4 items-center">
-            <img className="w-20 h-20 bg-gray-400" src="" alt="" />
+            <img className="w-20 h-20" src={img4} alt="learning" />
             <p className="w-1/2 font-semibold">Talk with people fluency</p>
           </div>
         </div>
@@ -35,7 +38,7 @@ const Instructions = () => {
           View All Course
         </Link>
       </div>
-      <div className="relative ">
+      <div className="relative hidden lg:block">
         <img
           className="img rounded-lg h-[550px] hover:scale-110 transition-all ease-linear duration-1000"
           src={img1}

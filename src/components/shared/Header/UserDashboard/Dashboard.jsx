@@ -50,9 +50,14 @@ const Dashboard = ({ role }) => {
               </>
             )}
             {role === "student" && (
-              <Link to="/mycourses" className="hover:text-purple-700">
-                My Learning
-              </Link>
+              <>
+                <Link to="/mycourses" className="hover:text-purple-700">
+                  My Learning
+                </Link>
+                <Link to="/payment-history" className="hover:text-purple-700">
+                  Payment History
+                </Link>
+              </>
             )}
             {role === "admin" && (
               <>
@@ -64,11 +69,11 @@ const Dashboard = ({ role }) => {
                 </Link>
               </>
             )}
-            <Link className="hover:text-purple-700">Notification</Link>
             <Link className="hover:text-purple-700">Message</Link>
           </div>
           <hr />
           <div className="flex flex-col items-start gap-2 py-2 px-8">
+            <Link className="hover:text-purple-700">Notification</Link>
             <Link className="hover:text-purple-700">Profile</Link>
             <button onClick={handleLogout} className="btn-neutral capitalize">
               Logout

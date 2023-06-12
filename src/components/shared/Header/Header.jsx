@@ -9,6 +9,8 @@ import Dashboard from "./UserDashboard/Dashboard";
 import { useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
 import useCart from "../../../hooks/useCart";
+import logo from "../../../assets/languages.png";
+import Category from "../Header/Category/Category";
 
 const Header = () => {
   const { user, role } = useContext(AuthContext);
@@ -17,12 +19,17 @@ const Header = () => {
   return (
     <header>
       <div className="flex justify-between items-center gap-8 px-8 py-4 shadow-lg max-w-[1920px] mx-auto">
-        <div className="w-[20%] flex items-center gap-6">
-          <Link to="/" className="text-xl font-bold font-['cursive']">
+        <div className="w-[20%] flex items-center gap-8">
+          <Link
+            to="/"
+            className="text-xl font-bold font-['cursive'] flex items-center gap-2"
+          >
+            <img className="h-5" src={logo} alt="logo" />
             GlobalSpeak
           </Link>
+          <Category />
         </div>
-        <div className="w-[30%] relative">
+        <div className="w-[30%] relative hidden lg:block">
           <BsSearch className="absolute top-[20px] left-3" />
           <Search />
         </div>
