@@ -6,7 +6,7 @@ import Container from "../../../components/shared/Container";
 const PaymentHistory = () => {
   const { user } = useContext(AuthContext);
   const [data] = useFetch(
-    `http://localhost:3000/payments-history?email=${user?.email}`
+    `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/payments-history?email=${user?.email}`
   );
   return (
     <Container>

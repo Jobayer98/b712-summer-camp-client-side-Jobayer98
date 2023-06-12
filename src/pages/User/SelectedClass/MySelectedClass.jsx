@@ -3,7 +3,6 @@ import Payment from "../Payment/Payment";
 import useCart from "../../../hooks/useCart";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-// import { useState } from "react";
 
 const notify = () => toast.success("Remove from cart");
 
@@ -41,8 +40,7 @@ const MySelectedClass = () => {
                   <img
                     loading="lazy"
                     className="h-32 w-full"
-                    src="https://assets.dulwich.org/thumbs/schools/fit/472x256/wechat-image-20210902150627-20210922-151534-393.jpg"
-                    alt=""
+                    src={item.image}
                   />
                 </figure>
                 <div className="px-6 my-4 flex flex-col gap-1 items-start">
