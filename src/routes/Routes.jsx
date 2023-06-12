@@ -15,6 +15,7 @@ import Checkout from "../pages/User/Payment/Checkout";
 import AllClasses from "../pages/Admin/AllClasses/AllClasses";
 import ManageUser from "../pages/Admin/ManageUser/ManageUser";
 import ErrorPage from "../pages/Error/Error";
+import PaymentHistory from "../pages/User/Payment/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -80,6 +81,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Checkout />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment-history",
+        element: (
+          <PrivateRoute>
+            <PaymentHistory />
           </PrivateRoute>
         ),
       },
