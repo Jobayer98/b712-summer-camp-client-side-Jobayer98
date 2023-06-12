@@ -18,8 +18,13 @@ const LoginPage = () => {
   const passRef = useRef();
   const location = useLocation();
   const navigate = useNavigate();
-  const { login, loginWithGoogle, loginWithFacebook, loginWithGithub } =
-    useContext(AuthContext);
+  const {
+    setRole,
+    login,
+    loginWithGoogle,
+    loginWithFacebook,
+    loginWithGithub,
+  } = useContext(AuthContext);
 
   const from = location.state?.form?.pathname || "/";
 
@@ -112,7 +117,20 @@ const LoginPage = () => {
         "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users",
         user
       )
-      .then(() => {});
+      .then((res) => {
+        if (res.data) {
+          axios
+            .get(
+              `https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users?email=${user.email}`
+            )
+            .then((res) => {
+              if (res.data) {
+                setRole(res.data[0].role);
+                localStorage.setItem("role", res.data[0].role);
+              }
+            });
+        }
+      });
   };
   return (
     <div className="w-full md:max-w-[480px] lg:max-w-[500px] md:px-4 lg:px-6 lg:py-12 mx-auto my-8">

@@ -1,34 +1,58 @@
-import { useForm } from "react-hook-form";
 import Container from "../../../components/shared/Container";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import AuthContext from "../../../context/AuthContext";
 import { toast } from "react-hot-toast";
 
-const notify = () => toast.success("Signup successfully");
+const notify = () => toast.success("Course added");
 
 const Dashboard = () => {
-  const { register, handleSubmit } = useForm();
   const { user } = useContext(AuthContext);
+  const courseName = useRef();
+  const image = useRef();
+  const instructorName = useRef();
+  const availableSeats = useRef();
+  const price = useRef();
 
-  const onSubmit = (data) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value;
+    const image = form.image.value;
+    const instructorName = form.instructorName.value;
+    const availableSeats = parseFloat(form.availableSeats.value);
+    const price = parseFloat(form.price.value);
+
+    const course = {
+      name,
+      image,
+      email: user.email,
+      instructorName,
+      availableSeats,
+      price,
+    };
     axios
       .post(
         "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/add-class",
-        data
+        course
       )
       .then((res) => {
+        console.log(res.data);
         if (res.data) {
           notify();
         }
-      })
-      .catch(() => {});
+      });
   };
+
   return (
     <Container>
-      <div className=" flex justify-center my-16">
-        <form onSubmit={handleSubmit(onSubmit)} className="max-w-md">
-          <div className="md:flex md:items-center mb-6">
+      <h1 className="text-center bg-purple-300 mt-12 text-3xl">
+        Add a new Course
+      </h1>
+      <div className=" flex justify-center">
+        <form onSubmit={handleSubmit} className="max-w-md">
+          <div className="md:flex md:items-center mb-2">
             <div className="md:w-1/3">
               <label
                 className="block text-gray-600 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -43,11 +67,11 @@ const Dashboard = () => {
                 id="inline-full-name"
                 type="text"
                 name="name"
-                {...register("name", { required: true })}
+                ref={courseName}
               />
             </div>
           </div>
-          <div className="md:flex md:items-center mb-6">
+          <div className="md:flex md:items-center mb-2">
             <div className="md:w-1/3">
               <label
                 className="block text-gray-600 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -63,11 +87,11 @@ const Dashboard = () => {
                 type="url"
                 placeholder="http://example.com"
                 name="image"
-                {...register("image", { required: true })}
+                ref={image}
               />
             </div>
           </div>
-          <div className="md:flex md:items-center mb-6">
+          <div className="md:flex md:items-center mb-2">
             <div className="md:w-1/3">
               <label
                 className="block text-gray-600 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -84,11 +108,11 @@ const Dashboard = () => {
                 defaultValue={user.displayName || "annonymus"}
                 readOnly
                 name="instructorName"
-                {...register("instructorName", { required: true })}
+                ref={instructorName}
               />
             </div>
           </div>
-          <div className="md:flex md:items-center mb-6">
+          <div className="md:flex md:items-center mb-2">
             <div className="md:w-1/3">
               <label
                 className="block text-gray-600 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -105,11 +129,10 @@ const Dashboard = () => {
                 defaultValue={user.email}
                 readOnly
                 name="email"
-                {...register("email", { required: true })}
               />
             </div>
           </div>
-          <div className="md:flex md:items-center mb-6">
+          <div className="md:flex md:items-center mb-2">
             <div className="md:w-1/3">
               <label
                 className="block text-gray-600 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -126,11 +149,11 @@ const Dashboard = () => {
                 min="0"
                 placeholder=""
                 name="availableSeats"
-                {...register("availableSeats", { required: true })}
+                ref={availableSeats}
               />
             </div>
           </div>
-          <div className="md:flex md:items-center mb-6">
+          <div className="md:flex md:items-center mb-2">
             <div className="md:w-1/3">
               <label
                 className="block text-gray-600 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -147,7 +170,7 @@ const Dashboard = () => {
                 placeholder="$99"
                 min="1"
                 name="price"
-                {...register("price", { required: true })}
+                ref={price}
               />
             </div>
           </div>

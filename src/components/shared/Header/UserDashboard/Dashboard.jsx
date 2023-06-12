@@ -7,6 +7,7 @@ const Dashboard = ({ role }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
+    localStorage.removeItem("role");
     navigate("/");
   };
   return (

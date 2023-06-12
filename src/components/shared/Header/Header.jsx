@@ -34,19 +34,24 @@ const Header = () => {
           <Search />
         </div>
         <div className="w-[50%] flex justify-end items-center gap-4">
-          {role === "admin" && <Link to="/manage-users">Manage Users</Link>}
+          {user && role === "admin" && (
+            <Link to="/manage-users">Manage Users</Link>
+          )}
           <Link to="/allcourses">Courses</Link>
           <Link to="/instructors">Instructors</Link>
-          <div className="relative mr-4">
-            <Link to="/my-selected-classes ">
-              <HiOutlineShoppingCart className="text-2xl cursor-pointer" />
-              <span className="absolute bottom-4 -right-4 rounded-full bg-purple-700 px-2 pt-[1px] flex justify-center items-center text-white">
-                {data?.length || 0}
-              </span>
-            </Link>
-          </div>
+
           {user ? (
             <>
+              {role === "student" && (
+                <div className="relative mr-4">
+                  <Link to="/my-selected-classes ">
+                    <HiOutlineShoppingCart className="text-2xl cursor-pointer" />
+                    <span className="absolute bottom-4 -right-4 rounded-full bg-purple-700 px-2 pt-[1px] flex justify-center items-center text-white">
+                      {data?.length || 0}
+                    </span>
+                  </Link>
+                </div>
+              )}
               <Dashboard role={role} />
             </>
           ) : (

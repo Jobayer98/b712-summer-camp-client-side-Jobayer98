@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 
 const AuthProvider = ({ children }) => {
-  const [role, setRole] = useState("admin");
+  const [role, setRole] = useState("student");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -61,6 +61,9 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    const role = localStorage.getItem("role");
+    setRole(role);
+    console.log(role);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
