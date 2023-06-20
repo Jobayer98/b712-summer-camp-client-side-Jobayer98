@@ -126,6 +126,7 @@ const LoginPage = () => {
             )
             .then((res) => {
               if (res.data) {
+                console.log(res.data);
                 setRole(res.data[0].role);
                 localStorage.setItem("role", res.data[0].role);
               }

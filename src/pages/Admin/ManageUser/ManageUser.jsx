@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const ManageUser = () => {
   const [data] = useFetch(
-    "https://b7a12-summer-camp-server-side-jobayer981.vercel.app0/users"
+    "https://b7a12-summer-camp-server-side-jobayer981.vercel.app/users"
   );
 
   return (
